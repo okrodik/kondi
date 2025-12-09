@@ -18,6 +18,7 @@ namespace kondi
         {
             InitializeComponent();
             comboBox1.SelectedIndex = 0;
+            Vivod();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -42,6 +43,22 @@ namespace kondi
 
             BD.openSQL();
             cmd.ExecuteNonQuery();
+            BD.closeSQL();
+
+            Vivod();
+        }
+
+        private void Vivod()
+        {
+            BD.openSQL();
+            SqlCommand cmd = new SqlCommand("SELECT * FROM Bid", BD.conn);
+
+            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+
+            DataTable dt = new DataTable();
+            adapter.Fill(dt);
+
+            dataGridView1.DataSource = dt;
             BD.closeSQL();
         }
     }
