@@ -9,7 +9,8 @@ namespace kondi
 {
     static class BD
     {
-        public static SqlConnection conn = new SqlConnection("Data Source = 192.168.166.120\\sqlexpress; Initial Catalog = basa17; User ID = basa17; Password = basa17");
+        //public static SqlConnection conn = new SqlConnection("Data Source = 192.168.166.120\\sqlexpress; Initial Catalog = basa17; User ID = basa17; Password = basa17");
+        public static SqlConnection conn = new SqlConnection("Data Source = MSI; Initial Catalog = condi; Integrated Security=SSPI");
 
         public static void openSQL()
         {

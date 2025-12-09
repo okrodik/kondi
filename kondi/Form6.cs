@@ -18,6 +18,7 @@ namespace kondi
         {
             InitializeComponent();
             Vivod();
+            AddComboInfo();
         }
 
         private void Vivod()
@@ -46,14 +47,22 @@ namespace kondi
             }
             reader.Close();
 
-            SqlCommand cmd1 = new SqlCommand("SELECT Users FROM Users", BD.conn);
+            SqlCommand cmd1 = new SqlCommand("SELECT Id, Users FROM Users", BD.conn);
 
             SqlDataReader reader1 = cmd1.ExecuteReader();
 
             while (reader1.Read())
             {
-                comboBox2.Items.Add(reader1["Users"]);
+                var user = new UserInfo
+                {
+                    Id = Convert.ToInt32(reader1["Id"]),
+                    Name = reader1["Users"].ToString()
+                };
+                comboBox2.Items.Add(user);
+
             }
+            comboBox2.DisplayMember = "Name";
+            comboBox2.ValueMember = "Id";
 
             BD.closeSQL();
         }
@@ -63,6 +72,36 @@ namespace kondi
             this.Hide();
             Form2 f2 = new Form2();
             f2.Show();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            BD.openSQL();
+
+            string sql;
+
+            if (string.IsNullOrWhiteSpace(richTextBox1.Text))
+            {
+                sql = "UPDATE Bid SET UserID = @val3 WHERE Id = @ID";
+            }
+            else
+            {
+                sql = "UPDATE Bid SET Description = @val2, UserID = @val3 WHERE Id = @ID";
+            }
+
+            SqlCommand cmd = new SqlCommand(sql, BD.conn);
+            cmd.Parameters.Add("@ID", SqlDbType.Int).Value = Convert.ToInt32(comboBox1.Text);
+            cmd.Parameters.Add("@val3", SqlDbType.Int).Value = ((UserInfo)comboBox2.SelectedItem).Id;
+
+            if (!string.IsNullOrWhiteSpace(richTextBox1.Text))
+            {
+                cmd.Parameters.Add("@val2", SqlDbType.NVarChar).Value = richTextBox1.Text;
+            }
+
+            cmd.ExecuteNonQuery();
+            BD.closeSQL();
+
+            Vivod();
         }
     }
 }

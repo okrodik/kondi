@@ -79,7 +79,6 @@ namespace kondi
 
         private void IzmenitOpisanie(int id)
         {
-
             BD.openSQL();
 
             SqlDataAdapter adapter = new SqlDataAdapter();
@@ -139,11 +138,6 @@ namespace kondi
             this.Hide();
             Form2 f2 = new Form2();
             f2.Show();
-        }
-
-        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            MessageBox.Show(comboBox3.ValueMember);
         }
     }
 }
