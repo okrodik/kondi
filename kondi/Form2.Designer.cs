@@ -91,12 +91,14 @@
             this.отследитьToolStripMenuItem.Name = "отследитьToolStripMenuItem";
             this.отследитьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.отследитьToolStripMenuItem.Text = "Отследить";
+            this.отследитьToolStripMenuItem.Click += new System.EventHandler(this.отследитьToolStripMenuItem_Click);
             // 
             // назначитьToolStripMenuItem
             // 
             this.назначитьToolStripMenuItem.Name = "назначитьToolStripMenuItem";
             this.назначитьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.назначитьToolStripMenuItem.Text = "Назначить";
+            this.назначитьToolStripMenuItem.Click += new System.EventHandler(this.назначитьToolStripMenuItem_Click);
             // 
             // расчетToolStripMenuItem
             // 
