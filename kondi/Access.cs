@@ -8,6 +8,6 @@ namespace kondi
 {
     static class Access
     {
-        public static string access = "";
+        public static string access = "0";
     }
 }

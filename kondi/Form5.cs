@@ -61,8 +61,15 @@ namespace kondi
 
             BD.openSQL();
             SqlCommand cmd = new SqlCommand("SELECT Status FROM Bid WHERE Id =@ID", BD.conn);
-            cmd.Parameters.Add("@ID", SqlDbType.Int).Value = x;
-
+            if (x == 0)
+            {
+                return;
+            }
+            else
+            {
+                cmd.Parameters.Add("@ID", SqlDbType.Int).Value = x;
+            }
+            
             object result = cmd.ExecuteScalar();
             if (result != null)
             {
