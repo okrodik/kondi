@@ -30,7 +30,6 @@ namespace kondi
 
         private void button1_Click(object sender, EventArgs e)
         {
-
             SqlCommand cmd = new SqlCommand("INSERT INTO [Bid] (Date, Type, Model, Description, FIO, Number, Status) " +
                 "VALUES (@val2, @val3, @val4, @val5, @val6, @val7, @val8)", BD.conn);
             cmd.Parameters.Add(new SqlParameter("@val2", SqlDbType.Date)).Value = dateTimePicker1.Text;

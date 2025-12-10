@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,21 @@ namespace kondi
         public Form2()
         {
             InitializeComponent();
+            Vivod();
+        }
+
+        private void Vivod()
+        {
+            BD.openSQL();
+            SqlCommand cmd = new SqlCommand("SELECT * FROM Bid", BD.conn);
+
+            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+
+            DataTable dt = new DataTable();
+            adapter.Fill(dt);
+
+            dataGridView1.DataSource = dt;
+            BD.closeSQL();
         }
 
         private void выйтиToolStripMenuItem_Click(object sender, EventArgs e)
@@ -50,6 +66,13 @@ namespace kondi
             this.Hide();
             Form6 f6 = new Form6();
             f6.Show();
+        }
+
+        private void расчетToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Form7 f7 = new Form7();
+            f7.Show();
         }
     }
 }

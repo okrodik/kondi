@@ -19,6 +19,7 @@ namespace kondi
             InitializeComponent();
             Vivod();
             AddComboInfo();
+            Uved();
         }
 
         private void Vivod()
@@ -102,6 +103,32 @@ namespace kondi
             BD.closeSQL();
 
             Vivod();
+        }
+
+        private void Uved()
+        {
+            int x = Convert.ToInt32(Access.access);
+
+            BD.openSQL();
+            SqlCommand cmd = new SqlCommand("SELECT Status FROM Bid WHERE Id =@ID", BD.conn);
+            cmd.Parameters.Add("@ID", SqlDbType.Int).Value = x;
+
+            object result = cmd.ExecuteScalar();
+            if (result != null)
+            {
+                string status = result.ToString();
+
+                if (status == "Закрыт")
+                {
+                    label1.Text = $"Уведомление. Заказ под номером {x} завершен";
+                }
+               
+            }
+            else
+            {
+                label1.Text = "Уведомление. Ничего не менялось";
+            }
+            BD.closeSQL();
         }
     }
 }

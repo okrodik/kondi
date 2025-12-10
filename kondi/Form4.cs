@@ -132,6 +132,7 @@ namespace kondi
         private void button2_Click(object sender, EventArgs e)
         {
             IzmenitOpisanie(Convert.ToInt32(comboBox1.SelectedItem));
+            Access.access = comboBox1.SelectedItem.ToString();
         }
         private void button3_Click(object sender, EventArgs e)
         {

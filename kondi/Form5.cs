@@ -17,6 +17,7 @@ namespace kondi
         {
             InitializeComponent();
             Vivod();
+            Uvedomlenie();
         }
 
         private void Vivod()
@@ -52,6 +53,28 @@ namespace kondi
 
             dataGridView1.DataSource = dt;
             BD.closeSQL();
+        }
+
+        private void Uvedomlenie()
+        {
+            int x = Convert.ToInt32(Access.access);
+
+            BD.openSQL();
+            SqlCommand cmd = new SqlCommand("SELECT Status FROM Bid WHERE Id =@ID", BD.conn);
+            cmd.Parameters.Add("@ID", SqlDbType.Int).Value = x;
+
+            object result = cmd.ExecuteScalar();
+            if (result != null)
+            {
+                string status = result.ToString();
+                label1.Text = $"Уведомление. Заказ под номером {x} изменён на статус: {status}";
+            }
+            else
+            {
+                label1.Text = "Уведомление. Ничего не менялось";
+            }
+            BD.closeSQL();
+
         }
     }
 }
